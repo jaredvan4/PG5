@@ -18,6 +18,7 @@ int main(int argc, char** argv) {
 	delete Studs;
 	return 0;
 }
+
 //handles identiying what commands are being inputted
 bool ProcessCommand() {
 

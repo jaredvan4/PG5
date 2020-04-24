@@ -1,4 +1,6 @@
-int Tree::Valid() {
+#include "RBTree.h"
+#include "RBTreeNode.h"
+int RBTree::Valid() {
 
     int r;
 
@@ -17,7 +19,7 @@ int Tree::Valid() {
 }
 
 
-int Node::ValidNode() {
+int RBTreeNode::ValidNode() {
 
     int lc, rc, r;
 
