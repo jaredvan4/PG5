@@ -32,6 +32,7 @@ public:
 	string next(); //right once, left all the way down (makes use of first ())
 	string prev(); //left once, right all the way down (makes use of last ())
 	DRT* remove(string key, string n, string p);
+	void removeRoot();
 	//similar to search; keeps track of nsf and psf
 	//just works its down to the RBTree to find the node to remove
 	//then calls remove ()
