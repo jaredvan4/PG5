@@ -1,4 +1,5 @@
 #include "RBTreeNode.h"
+#include "DRT.h"
 RBTreeNode::RBTreeNode(string key, string data, RBTreeNode* l, RBTreeNode* r, RBTreeNode* p, RBTree* T)
 {
 	k = key; d = data; left = l; right = r; parent = p; t = T;
@@ -7,6 +8,10 @@ RBTreeNode::~RBTreeNode()
 {
 	delete left;
 	delete right;
+}
+DRT* RBTreeNode::searchnode(string key, string n, string p)
+{
+	return nullptr;
 }
 //left all the way down 
 RBTreeNode* RBTreeNode::first(){
@@ -45,6 +50,26 @@ RBTreeNode* RBTreeNode::getright()
 RBTreeNode* RBTreeNode::getleft()
 {
 	return left;
+}
+
+string RBTreeNode::next(){
+	//right once, left all the way down
+	if (right) {
+		return right->first()->getk();
+	}
+	else {
+		return this->getk();
+	}
+}
+
+string RBTreeNode::prev(){
+	//left once, right all the way down
+	if (left) {
+		return left->last()->getk();
+	}
+	else {
+		return this->getk();
+	}
 }
 
 void RBTreeNode::setparent(RBTreeNode* p)
