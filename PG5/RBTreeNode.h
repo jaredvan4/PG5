@@ -48,6 +48,7 @@ public:
 	void rotate();
 	void AddProcess();
 	int ValidNode();
+	RBTreeNode* getSibling(RBTreeNode*n, RBTreeNode *p);
 };
 
 #endif

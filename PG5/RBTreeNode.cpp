@@ -7,6 +7,39 @@ RBTreeNode::~RBTreeNode() {
 	delete left;
 	delete right;
 }
+DRT* RBTreeNode::add(string key, string data, string n, string p) {
+	//call AddProcess() somewhere?
+	if (k == key) {
+		DRT* temp = new DRT(d, n, p);
+		d = data;
+		string next;
+		string prev;
+		if (!right)
+			next = n;
+		else next = right->first()->getk();
+		if (!left)
+			prev = p;
+		else prev = left->last()->getk();
+		return temp;
+	}
+	if (k < key) {
+		if (right) {
+			return right->add(key, data, n, k);
+		}
+		else {
+			right = new RBTreeNode(key, data, NULL, NULL, this, t);
+			return new DRT("", n, k);
+		}
+
+	}
+	if (left) {
+		return left->add(key, data, k, p);
+	}
+	else {
+		left = new RBTreeNode(key, data, NULL, NULL, this, t);
+		return new DRT("", k, p);
+	}
+}
 DRT* RBTreeNode::searchnode(string key, string n, string p) {
 	if (k == key) {
 		string next, prev;
@@ -209,26 +242,97 @@ RBTreeNode* RBTreeNode::getparent() {
 }
 
 bool RBTreeNode::isblack() {
-	return false;
+	return black;
 }
 
 void RBTreeNode::setblack(bool b) {
+	black = b;
 }
 
 RBTreeNode* RBTreeNode::getdirect() {
-	return nullptr;
+	if (parent->getright() == this) {
+		return right;
+	}
+	else {
+		return left;
+	}
 }
 
 bool RBTreeNode::isdirect() {
-	return false;
+	if (this == parent->getleft()) {
+		if (parent == parent->getparent()->getleft()) {
+			return true;
+		}
+		else {
+			return false;
+		}
+
+	}
+	else {
+		//I'm right child
+		if (parent == parent->getparent()->getright()) {
+			return true;
+		}
+		else {
+			return false;
+		}
+
+	}
+
 }
 
 void RBTreeNode::rotate() {
+	//x's parent needs to point to GP? 
+    //etc
 }
 
 void RBTreeNode::AddProcess() {
+	//applies rules 3-7
+	//if I'm root
+	if (parent == nullptr) {
+		black == true;
+		return;
+	}
+
+	if (parent->isblack() == true) {
+		return;
+	//if parent is left
+	}
+	if (parent->getparent()->getleft() == parent) {
+		//if right uncle is red
+		if (parent->getparent()->getright()->isblack() == false) {
+			//set my parent& uncle black 
+			parent->setblack(true);
+			parent->getparent()->getright()->setblack(true);
+			//color grandparent red
+			parent->getparent()->setblack(false);
+			//re-assign x to be x's GP,RESTART on NEW X??
+		}
+	//if parent is right
+	}else if (parent->getparent()->getright() == parent) {
+		//if left uncle is red
+		if (parent->getparent()->getleft()->isblack() == false) {
+			//set my parent& uncle black
+			parent->setblack(true);
+			parent->getparent()->getleft()->setblack(true);
+			//color grandparent red
+			parent->getparent()->setblack(false);
+			//re-assign x to be x's GP,RESTART on NEW X??
+		}
+	}
+	//rotate up twice, done?
+
 }
 
+RBTreeNode* RBTreeNode::getSibling(RBTreeNode* n, RBTreeNode* p) {
+	//returns the child of p that isn't n
+	if (p->getleft() == n) {
+		return p->getright();
+	}
+	else {
+		return p->getleft();
+	}
+}
 int RBTreeNode::ValidNode() {
 	return 0;
 }

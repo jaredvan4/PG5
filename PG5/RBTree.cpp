@@ -11,7 +11,14 @@ RBTree::~RBTree() {
 }
 
 DRT* RBTree::add(string key, string data) {
-	return nullptr;
+	if (!root) {
+		root = new RBTreeNode(key, data, NULL, NULL, NULL, this);
+		root->AddProcess();
+		return new DRT("", "", "");
+	}
+	else {
+		return root->add(key, data, "", "");
+	}
 }
 
 void RBTree::setroot(RBTreeNode* r) {
