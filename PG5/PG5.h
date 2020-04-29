@@ -11,7 +11,7 @@ using namespace std;
 Database* Studs;
 
 int main(int argc, char** argv);
-bool ProcessCommand(string cmd);
+bool ProcessCommand();
 void Print();
 void RPrint();
 void AddCommand(string cmd);

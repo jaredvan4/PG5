@@ -12,7 +12,7 @@
 using namespace std;
 //main method program enters and exits from
 int main(int argc, char** argv) {
-	string command;
+	/*string command;
 	ifstream file("PG5-1.in.txt");
 	if (!file.is_open()) {
 		cout << "file failed to open!" << endl;
@@ -25,15 +25,17 @@ int main(int argc, char** argv) {
 	}
 	file.close();
 	delete Studs;
-	return 0;
-	/*Studs = new RBTree();
+	return 0;*/
+	Studs = new RBTree();
 	while (ProcessCommand());
 	delete Studs;
-	return 0;*/
+	return 0;
 }
 
 //handles identiying what commands are being inputted
-bool ProcessCommand(string cmd) {
+bool ProcessCommand() {
+	string cmd;
+	getline(cin, cmd);
 	if (cmd == "EXIT") return false;
 	if (cmd == "PRINT") Print();
 	else if (cmd == "RPRINT") RPrint();

@@ -3,10 +3,12 @@
 #include "RBTreeNode.h"
 #include "DRT.h"
 #include "RBHelper.h"
+//constructor
 RBTreeNode::RBTreeNode(string key, string data, RBTreeNode* l, RBTreeNode* r, RBTreeNode* p, RBTree* T) {
 	k = key; d = data; left = l; right = r; parent = p; t = T;
 	setblack(false);
 }
+//decontructor
 RBTreeNode::~RBTreeNode() {
 	delete left;
 	delete right;
@@ -35,13 +37,6 @@ DRT* RBTreeNode::add(string key, string data, string n, string p) {
 			//color red
 			right->setblack(false);
 			right->AddProcess();
-			/*if (t->Valid()){
-				cout << "Tree is valid!\n";
-			}
-			else {
-				cout << "Tree isn't valid!!!\n";
-				exit(0);
-			}*/
 
 			return new DRT("", n, k);
 		}
@@ -55,13 +50,7 @@ DRT* RBTreeNode::add(string key, string data, string n, string p) {
 		//color red
 		left->setblack(false);
 		left->AddProcess();
-		/*if (t->Valid()) {
-			cout << "Tree is valid!\n";
-		}
-		else {
-			cout << "Tree isn't valid!!!\n";
-			exit(0);
-		}*/
+		
 		return new DRT("", k, p);
 	}
 }
@@ -108,11 +97,11 @@ string RBTreeNode::getk() {
 string RBTreeNode::getd() {
 	return d;
 }
-
+//returns right
 RBTreeNode* RBTreeNode::getright() {
 	return right;
 }
-
+//returns left
 RBTreeNode* RBTreeNode::getleft() {
 	return left;
 }
@@ -126,7 +115,7 @@ string RBTreeNode::next() {
 		return this->getk();
 	}
 }
-
+//find previous
 string RBTreeNode::prev() {
 	//left once, right all the way down
 	if (left) {
@@ -136,7 +125,7 @@ string RBTreeNode::prev() {
 		return this->getk();
 	}
 }
-
+//finds node to remove
 DRT* RBTreeNode::remove(string key, string n, string p) {
 	if (this->k == key) {
 		if (!parent) {
@@ -162,7 +151,6 @@ DRT* RBTreeNode::remove(string key, string n, string p) {
 		if (left) return left->remove(key, n, p);
 		return new DRT("", k, p);
 	}
-	//NOT DONE !
 	//similar to search; keeps track of nsf and psf
 	 //just works its down to the tree to find the node to remove
 	 //then calls remove ()
@@ -214,13 +202,7 @@ void RBTreeNode::remove() {
 
 	// 0 child case
 	if (!left && !right) {
-		/*if (t->Valid()) {
-			cout << "tree is valid!\n";
-		}
-		else {
-			cout << "tree is invalide!\n";
-			exit(0);
-		}*/
+	
 		if (parent->getleft() == this) {
 			parent->setleft(nullptr);
 		}
@@ -229,30 +211,16 @@ void RBTreeNode::remove() {
 		}
 		//if node is red, done!
 		if (black == false) {
-			/*if (t->Valid()) {
-				cout << "tree is valid!\n";
-			}
-			else {
-				cout << "tree is invalide!\n";
-				exit(0);
-			}*/
+			
 			left = nullptr;
 			right = nullptr;
 			delete this;
 		}
 		//if node is black del process
 		else {
-			/*if (k.substr(0,6)== "PUTQAE") {
-				cout << " \n ";
-			}*/
+			
 			DelProcess(nullptr, parent);
-			/*if (t->Valid()) {
-				cout << "tree is valid!\n";
-			}
-			else {
-				cout << "tree is invalide!\n";
-				exit(0);
-			}*/
+			
 			left = nullptr;
 			right = nullptr;
 			delete this;
@@ -279,26 +247,14 @@ void RBTreeNode::remove() {
 			}
 			//if node is red, done!
 			if (black == false) {
-				/*if (t->Valid()) {
-					cout << "tree is valid!\n";
-				}
-				else {
-					cout << "tree is invalide!\n";
-					exit(0);
-				}*/
+			
 				left = nullptr;
 				right = nullptr;
 				delete this;
 			}
 			else {
 				DelProcess(temp, parent);
-				/*if (t->Valid()) {
-					cout << "tree is valid!\n";
-				}
-				else {
-					cout << "tree is invalide!\n";
-					exit(0);
-				}*/
+		
 				left = nullptr;
 				right = nullptr;
 				delete this;
@@ -327,13 +283,7 @@ void RBTreeNode::remove() {
 			}
 			else {
 				DelProcess(temp, parent);
-				/*if (t->Valid()) {
-					cout << "tree is valid!\n";
-				}
-				else {
-					cout << "tree is invalide!\n";
-					exit(0);
-				}*/
+			
 				left = nullptr;
 				right = nullptr;
 				delete this;
@@ -386,7 +336,7 @@ RBTreeNode* RBTreeNode::getdirect() {
 		return left;
 	}
 }
-
+//finds if node is direct
 bool RBTreeNode::isdirect() {
 	//if I'm  a left child
 	if (this == parent->getleft()) {
