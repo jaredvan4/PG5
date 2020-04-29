@@ -82,12 +82,12 @@ void AddCommand(string cmd) {
 	DRT* R = Studs->search(k);
 	if (R->getdata() == "") {
 		Studs->modify(k, "1");
-		cout << "one copy of " << k << " has been added to the library!" << endl;
+		cout << "one copy of " << k << " has been added to the library!\n";
 	}
 	else {
 		string modify = to_string(stoi(R->getdata()) + 1);
 		Studs->modify(k, modify);
-		cout << "one copy of " << k << " has been added to the library!" << endl;
+		cout << "one copy of " << k << " has been added to the library!\n";
 	}
 }
 
