@@ -149,6 +149,7 @@
   <ItemGroup>
     <ClCompile Include="DRT.cpp" />
     <ClCompile Include="PG5.cpp" />
+    <ClCompile Include="RBHelper.cpp" />
     <ClCompile Include="RBTree.cpp" />
     <ClCompile Include="RBTreeNode.cpp" />
   </ItemGroup>
@@ -156,6 +157,7 @@
     <ClInclude Include="Database.h" />
     <ClInclude Include="DRT.h" />
     <ClInclude Include="PG5.h" />
+    <ClInclude Include="RBHelper.h" />
     <ClInclude Include="RBTree.h" />
     <ClInclude Include="RBTreeNode.h" />
   </ItemGroup>

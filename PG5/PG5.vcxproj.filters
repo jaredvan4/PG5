@@ -27,6 +27,9 @@
     <ClCompile Include="DRT.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="RBHelper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PG5.h">
@@ -42,6 +45,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DRT.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RBHelper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

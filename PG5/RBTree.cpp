@@ -67,9 +67,25 @@ DRT* RBTree::search(string key) {
 }
 
 DRT* RBTree::modify(string key, string data) {
-	return nullptr;
+	if (key == "") return new DRT("", first(), last());
+	if (data == "") return remove(key);
+	return add(key, data);
 }
 
 int RBTree::Valid() {
-	return 0;
+	int r;
+
+	if (!root) {
+		r = 1;
+	}
+	else {
+		if (!root->isblack()) {
+			r = 0;
+		}
+		else {
+			r = root->ValidNode() != -1;
+		}
+	}
+	return r;
 }
+
