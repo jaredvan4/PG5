@@ -1,3 +1,5 @@
+//Jared VanEnkevort
+//contains all the function definitions for the prototypes present in RBtree.h
 #include "RBTree.h"
 #include "DRT.h"
 #include "RBTreeNode.h"
@@ -53,7 +55,10 @@ string RBTree::last() {
 }
 
 DRT* RBTree::remove(string key) {
-	return nullptr;
+	if (!root) {
+		return new DRT("", "", "");
+	}
+	return root->remove(key, "", "");
 }
 
 DRT* RBTree::search(string key) {
@@ -74,12 +79,11 @@ DRT* RBTree::modify(string key, string data) {
 
 int RBTree::Valid() {
 	int r;
-
 	if (!root) {
 		r = 1;
 	}
 	else {
-		if (!root->isblack()) {
+		if (!root->isblack()|| root->getparent()) {
 			r = 0;
 		}
 		else {

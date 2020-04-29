@@ -1,3 +1,5 @@
+//Jared VanEnkevort
+//contains all the function prototypes for the deinftions in PG5.cpp
 #ifndef _PG5_
 #define _PG5_
 
@@ -9,7 +11,7 @@ using namespace std;
 Database* Studs;
 
 int main(int argc, char** argv);
-bool ProcessCommand();
+bool ProcessCommand(string cmd);
 void Print();
 void RPrint();
 void AddCommand(string cmd);

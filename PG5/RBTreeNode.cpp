@@ -1,3 +1,5 @@
+//Jared VanEnkevort
+//contains all the defintions for the prototypes present in RBTreenode.h
 #include "RBTreeNode.h"
 #include "DRT.h"
 #include "RBHelper.h"
@@ -33,20 +35,13 @@ DRT* RBTreeNode::add(string key, string data, string n, string p) {
 			//color red
 			right->setblack(false);
 			right->AddProcess();
-			if (t->Valid()){
+			/*if (t->Valid()){
 				cout << "Tree is valid!\n";
 			}
 			else {
 				cout << "Tree isn't valid!!!\n";
 				exit(0);
-			}
-			if (ValidNode()) {
-				cout << "Valid node!\n";
-			}
-			else {
-				cout << "invalid node !!!\n";
-				exit(0);
-			}
+			}*/
 
 			return new DRT("", n, k);
 		}
@@ -60,20 +55,13 @@ DRT* RBTreeNode::add(string key, string data, string n, string p) {
 		//color red
 		left->setblack(false);
 		left->AddProcess();
-		if (t->Valid()) {
+		/*if (t->Valid()) {
 			cout << "Tree is valid!\n";
 		}
 		else {
 			cout << "Tree isn't valid!!!\n";
 			exit(0);
-		}
-		if (ValidNode()) {
-			cout << "Valid node!\n";
-		}
-		else {
-			cout << "invalid node !!!\n";
-			exit(0);
-		}
+		}*/
 		return new DRT("", k, p);
 	}
 }
@@ -185,16 +173,27 @@ void RBTreeNode::removeRoot() {
 	if (!left && !right) {
 		t->setroot(nullptr);
 		DelProcess(NULL, parent);
+		left = nullptr;
+		right = nullptr;
+		delete this;
 	}
 	//one child case
 	else if (left != NULL && right == NULL || right != NULL && left == NULL) {
 		if (left) {
 			left->setparent(nullptr);
 			t->setroot(left);
+			DelProcess(left, nullptr);
+			left = nullptr;
+			right = nullptr;
+			delete this;
 		}
 		else {
 			right->setparent(nullptr);
 			t->setroot(right);
+			DelProcess(right, nullptr);
+			left = nullptr;
+			right = nullptr;
+			delete this;
 		}
 	}
 	//2 child case
@@ -206,19 +205,7 @@ void RBTreeNode::removeRoot() {
 		d = next->getd();
 		next->remove();
 	}
-		left = nullptr;
-		right = nullptr;
-	if (getcolor(this) == false) {
-		DelProcess(nullptr, parent);
-		delete this;
-		return;
-	}
-	else {
 		
-		delete this;
-		return;
-	}
-	return;
 	
 }
 
@@ -227,13 +214,51 @@ void RBTreeNode::remove() {
 
 	// 0 child case
 	if (!left && !right) {
+		/*if (t->Valid()) {
+			cout << "tree is valid!\n";
+		}
+		else {
+			cout << "tree is invalide!\n";
+			exit(0);
+		}*/
 		if (parent->getleft() == this) {
 			parent->setleft(nullptr);
 		}
 		else if (parent->getright() == this) {
 			parent->setright(nullptr);
 		}
-		delete this;
+		//if node is red, done!
+		if (black == false) {
+			/*if (t->Valid()) {
+				cout << "tree is valid!\n";
+			}
+			else {
+				cout << "tree is invalide!\n";
+				exit(0);
+			}*/
+			left = nullptr;
+			right = nullptr;
+			delete this;
+		}
+		//if node is black del process
+		else {
+			/*if (k.substr(0,6)== "PUTQAE") {
+				cout << " \n ";
+			}*/
+			DelProcess(nullptr, parent);
+			/*if (t->Valid()) {
+				cout << "tree is valid!\n";
+			}
+			else {
+				cout << "tree is invalide!\n";
+				exit(0);
+			}*/
+			left = nullptr;
+			right = nullptr;
+			delete this;
+		}
+		
+		
 	}
 	//one child case
 	else if (left != NULL && right == NULL || right != NULL && left == NULL) {
@@ -252,18 +277,34 @@ void RBTreeNode::remove() {
 				right->setparent(parent);
 				parent->setleft(right);
 			}
+			//if node is red, done!
+			if (black == false) {
+				/*if (t->Valid()) {
+					cout << "tree is valid!\n";
+				}
+				else {
+					cout << "tree is invalide!\n";
+					exit(0);
+				}*/
 				left = nullptr;
 				right = nullptr;
-			if (getcolor(this) == false) {
-				DelProcess(temp, parent);
 				delete this;
-				return;
 			}
 			else {
-				
+				DelProcess(temp, parent);
+				/*if (t->Valid()) {
+					cout << "tree is valid!\n";
+				}
+				else {
+					cout << "tree is invalide!\n";
+					exit(0);
+				}*/
+				left = nullptr;
+				right = nullptr;
 				delete this;
-				return;
 			}
+			
+	
 		}
 		else {
 			//if  node to be delted is right child
@@ -278,16 +319,26 @@ void RBTreeNode::remove() {
 				right->setparent(parent);
 				parent->setright(right);
 			}
-			if (getcolor(this) == false) {
-				DelProcess(temp, parent);
+			//if node is red, done!
+			if (black == false) {
+				left = nullptr;
+				right = nullptr;
 				delete this;
-				return;
 			}
 			else {
-
+				DelProcess(temp, parent);
+				/*if (t->Valid()) {
+					cout << "tree is valid!\n";
+				}
+				else {
+					cout << "tree is invalide!\n";
+					exit(0);
+				}*/
+				left = nullptr;
+				right = nullptr;
 				delete this;
-				return;
 			}
+	
 		}
 	}
 	//2 child case
@@ -364,6 +415,7 @@ void RBTreeNode::rotate() {
 	bool temp = black;
 	black = getcolor(parent);
 	parent->setblack(temp);
+	RBTreeNode* p = parent;
 	RBTreeNode* GP = parent->getparent();
 	RBTreeNode* Z;
 	if (parent->getright() == this) {
@@ -382,45 +434,48 @@ void RBTreeNode::rotate() {
 	}
 	else {
 		//if parent is a right child gp's right needs to point to this
-		if (GP->getright() == parent) {
-			parent->getparent()->setright(this);
+		if (GP->getright() == p) {
+			p->getparent()->setright(this);
 		}
 		//if parent is a left child of GP, GP's left needs to point to this? 
-		if (GP->getleft() == parent) {
-			parent->getparent()->setleft(this);
+		if (GP->getleft() == p) {
+			p->getparent()->setleft(this);
 		}
 	}
 	//#3
-	parent->setparent(this);
+	p->setparent(this);
 	//if im a left child of P 
-	if (parent->getleft() == this) {
+	if (p->getleft() == this) {
 		//my right needs to point to p
-		right = parent;
-		parent->setleft(Z);
+		right = p;
+		p->setleft(Z);
 	}
 	//If I'm a right child of P
-	if (parent->getright() == this) {
-		left = parent;
-		parent->setright(Z);
+	if (p->getright() == this) {
+		left = p;
+		p->setright(Z);
 	}
 	if (Z) {
-		Z->setparent(parent);
+		Z->setparent(p);
 	}
 }
 void RBTreeNode::AddProcess() {
 	//applies rules 3-7
 	//if I'm root
 	if (parent == nullptr) {
+		//cout << "in rule 3!\n";
 		black = true;
 		return;
 	}
 	//if parent is black
 	if (getcolor(parent) == true) {
+		/*cout << "in rule 4!\n";*/
 		return;
 	}
 	//if uncle is red
 	if (getcolor(getSibling(parent, parent->getparent())) == false) {
 		//color my parent and uncle black
+		//cout << "in rule 5\n!";
 		parent->setblack(true);
 		getSibling(parent, parent->getparent())->setblack(true);
 		//set my grandparent to be red
@@ -429,11 +484,12 @@ void RBTreeNode::AddProcess() {
 		return;
 	}
 	if (this->isdirect()) {
+		//cout << "in rule 6\n!";
 		//if x is a direct grandchild?
 		parent->rotate();
 		return;
 	}
-
+	//cout << "in rule 7!\n";
 	rotate();
 	rotate();
 	return;

@@ -1,3 +1,5 @@
+//Jared VanEnkevort
+//contains the function prototypes for the definiotions present in RBTreeNode.cpp
 #ifndef _RBTREENODE_
 #define _RBTREENODE_
 

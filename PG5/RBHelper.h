@@ -1,3 +1,5 @@
+//Jared VanEnkevort
+//contains the function prototypes for the definiotions present in RBHelper.cpp
 #ifndef _RBHELPER_
 #define _RBHELPER_
 

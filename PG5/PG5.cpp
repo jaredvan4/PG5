@@ -1,4 +1,3 @@
-
 //Jared VanEnkevort
 // contains all the function def for all included in PG5.h
 //I addded comments and I beleive I fixed returning old data from add &remove
@@ -13,7 +12,7 @@
 using namespace std;
 //main method program enters and exits from
 int main(int argc, char** argv) {
-	/*string command;
+	string command;
 	ifstream file("PG5-1.in.txt");
 	if (!file.is_open()) {
 		cout << "file failed to open!" << endl;
@@ -26,17 +25,15 @@ int main(int argc, char** argv) {
 	}
 	file.close();
 	delete Studs;
-	return 0;*/
-	Studs = new RBTree();
+	return 0;
+	/*Studs = new RBTree();
 	while (ProcessCommand());
 	delete Studs;
-	return 0;
+	return 0;*/
 }
 
 //handles identiying what commands are being inputted
-bool ProcessCommand() {
-	string cmd;
-	getline(cin, cmd);
+bool ProcessCommand(string cmd) {
 	if (cmd == "EXIT") return false;
 	if (cmd == "PRINT") Print();
 	else if (cmd == "RPRINT") RPrint();
@@ -143,6 +140,6 @@ void LookupCommand(string cmd) {
 		cout << k << "does not exist!\n " << "It would fall between  " << before << " and " << after << endl;
 	}
 	else {
-		cout << "Number of copies: " << R->getdata() << endl;
+		cout << "Number of copies of" << k<<":  " << R->getdata() << endl;
 	}
 }
